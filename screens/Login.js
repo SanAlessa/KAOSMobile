@@ -66,12 +66,15 @@ return(
                         secureTextEntry
                         onChangeText={(value) => inputLogin("password", value)}
                     />
-              
+         
                 </View>
+
+                <Text style={styles.register} onPress={()=> props.navigation.navigate('Register')}>Don't have an account? Click here!</Text>
+
                 
                 <View style={styles.botonesSignUp}>
                     <Button
-                        style={styles.pruebita}
+                        
                         title="SIGN IN"
                         color="#3f7fe9"
                         onPress= {sendUser}/>
@@ -94,6 +97,9 @@ return(
 }
 
 const styles ={
+    register:{
+       fontSize:15
+      },
 
     contenedorInputs:{  
         width:'100%'

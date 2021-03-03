@@ -36,5 +36,11 @@ const userAction = {
             Alert.alert("Bienvenido " + respuesta.data.response.firstname + " "+ respuesta.data.response.lastname + "!")
         }
     },
+
+    disconnectUser: () => {
+        return (dispatch, getState) => {
+            dispatch({type: 'DISCONNECT_USER'})
+        }
+    },
 }
 export default userAction
