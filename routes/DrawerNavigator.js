@@ -6,6 +6,8 @@ import Register from "../screens/Register";
 import Home from "../screens/Home";
 import CreditCard from "../screens/CreditCard";
 import SingleProduct from "../screens/SingleProduct";
+import ShopCart from "../screens/ShopCart";
+import AllProducts from "../screens/AllProducts";
 
 
 
@@ -19,6 +21,8 @@ if(props.loggedUser){
     <Drawer.Screen name="Home" component={Home} />
     <Drawer.Screen name="CreditCard" component={CreditCard} />
     <Drawer.Screen name="SingleProduct" component={SingleProduct} />
+    <Drawer.Screen name="ShopCart" component={ShopCart} />
+    <Drawer.Screen name="AllProducts" component={AllProducts} />
     
     
     
