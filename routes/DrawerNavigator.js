@@ -4,6 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Home from "../screens/Home";
+import CreditCard from "../screens/CreditCard";
+import SingleProduct from "../screens/SingleProduct";
 
 
 
@@ -15,6 +17,9 @@ if(props.loggedUser){
   var routes = 
   <>
     <Drawer.Screen name="Home" component={Home} />
+    <Drawer.Screen name="CreditCard" component={CreditCard} />
+    <Drawer.Screen name="SingleProduct" component={SingleProduct} />
+    
     
     
   </>
