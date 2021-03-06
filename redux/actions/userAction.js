@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Alert } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const userAction = {
@@ -34,6 +35,26 @@ const userAction = {
             payload: respuesta.data
             }) 
             Alert.alert("Bienvenido " + respuesta.data.response.firstname + " "+ respuesta.data.response.lastname + "!")
+        }
+    },
+    
+    logFromLS:(token)=> {
+        console.log(token)
+        return async (dispatch, getState) =>{
+            try{
+                const respuesta = await axios.post('https://kaos-challenge.herokuapp.com/api/user/ls',{token},{
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                dispatch({type: 'LOG_USER', payload:{response:{...respuesta.data.response}}})
+            }
+            catch(error){
+                if(error.response.status=== 401){
+                    alert("esta intentando ingresar sin permisos")
+                    AsyncStorage.clear()
+                }
+            }
         }
     },
 

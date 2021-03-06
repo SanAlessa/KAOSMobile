@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const initState = {
     loggedUser: null
   }
@@ -6,6 +7,7 @@ const initState = {
     
       switch(action.type){
         case 'LOG_USER' :
+          AsyncStorage.setItem('token', action.payload.response.token)
           return{
             ...state,
             loggedUser: action.payload

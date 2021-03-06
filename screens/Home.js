@@ -18,7 +18,7 @@ const Home =(props) => {
           <View style={styles.contenidoGeneral}>
             <View style={styles.cajaDesigner}>
               <Text style={styles.designer}>Designer Collection</Text>
-              <Text style={styles.show}>Show all</Text>
+              <Text style={styles.show} onPress={()=> props.navigation.navigate('Login')}>Show all</Text>
             </View>
             
             <View style={styles.cajaProducto}>
