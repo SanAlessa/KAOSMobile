@@ -40,7 +40,6 @@ const Login = (props) => {
     }
 
 
-
 return(
     <View style={styles.contenedor}>
         <ImageBackground source={fondoLogin} style={styles.fondo}>

@@ -1,129 +1,51 @@
 import React from 'react'
 import {View, Image, ImageBackground,Text, TextInput, Button, Alert, ScrollView} from 'react-native';
+import { useState } from "react"
+import { connect } from 'react-redux'
+import purchaseAction from '../redux/actions/purchaseAction'
+import ShopCard from './ShopCard'
 
-const ShopCart = () => {
+
+const ShopCart = (props) => {
+    
+    if(props.checkout.length > 0){
+        var prices = props.checkout.map(price=> price.price*price.quantity)
+        var totalPrice = prices.reduce((a, b)=> a + b)
+      }
+    
+     
+      
+
     return (
        <View style={styles.cajaPrincipal}>
-           <ScrollView>
-           <View styles={styles.contenedor}>
-            
-            <View style={styles.contenedorProducto}>
-                <View style={styles.cajaProducto}>
-                    <View style={styles.info}>
-                        <View>
-                            <Image style={{width:100,height:100, borderRadius:20,borderWidth: 1,}} source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/r/e/remera_disney_doc_m98561portada.jpg' }}/>
-                        </View>
-                        <View style={styles.descripcion}>
-                            <Text style={styles.opcion}>REMERA DE BLANCA NIEVES</Text>
-                            <Text style={styles.precio}>$1500</Text>
-                            <Text style={styles.cantidad}>Cantidad: 15</Text>
-                        </View>
-                    </View>
-                    
-                </View>
+           
+        <ScrollView>
+            <View styles={styles.contenedor}>
+        
+                {(props.checkout.length=== 0) ? <View style={{alignItems:'center', backgroundColor:'white'}}><Text style={{alignItems:'center', fontSize:30,marginTop:'80%', fontWeight:'bold'}}>Agrega un articulo al carrito!</Text><View style={{marginTop:30}}><Button onPress={()=> props.navigation.navigate('AllProducts')}  title='Ir a la tienda'></Button></View></View> :
+                    props.checkout.map((product,index)  =>{
+                            return(
+                            <ShopCard key={index} product={product}/>
+                            )
+                        })}
+
             </View>
-            
-
-        </View>
-
-
-
-        <View styles={styles.contenedor}>
-            
-            <View style={styles.contenedorProducto}>
-                <View style={styles.cajaProducto}>
-                    <View style={styles.info}>
-                        <View>
-                            <Image style={{width:100,height:100, borderRadius:20,borderWidth: 1,}} source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/r/e/remera_disney_doc_m98561portada.jpg' }}/>
-                        </View>
-                        <View style={styles.descripcion}>
-                            <Text style={styles.opcion}>REMERA DE BLANCA NIEVES</Text>
-                            <Text style={styles.precio}>$1500</Text>
-                            <Text style={styles.cantidad}>Cantidad: 15</Text>
-                        </View>
-                    </View>
-                    
-                </View>
-            </View>
-            
-
-        </View>
-
-        <View styles={styles.contenedor}>
-            
-            <View style={styles.contenedorProducto}>
-                <View style={styles.cajaProducto}>
-                    <View style={styles.info}>
-                        <View>
-                            <Image style={{width:100,height:100, borderRadius:20,borderWidth: 1,}} source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/r/e/remera_disney_doc_m98561portada.jpg' }}/>
-                        </View>
-                            <View style={styles.descripcion}>
-                                <Text style={styles.opcion}>REMERA DE BLANCA NIEVES</Text>
-                                <Text style={styles.precio}>$1500</Text>
-                                <Text style={styles.cantidad}>Cantidad: 15</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-        </View>
-        
-
-        <View styles={styles.contenedor}>
-            
-            <View style={styles.contenedorProducto}>
-                <View style={styles.cajaProducto}>
-                    <View style={styles.info}>
-                        <View>
-                            <Image style={{width:100,height:100, borderRadius:20,borderWidth: 1,}} source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/r/e/remera_disney_doc_m98561portada.jpg' }}/>
-                        </View>
-                            <View style={styles.descripcion}>
-                                <Text style={styles.opcion}>REMERA DE BLANCA NIEVES</Text>
-                                <Text style={styles.precio}>$1500</Text>
-                                <Text style={styles.cantidad}>Cantidad: 15</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-        </View>
-
-        <View styles={styles.contenedor}>
-            
-            <View style={styles.contenedorProducto}>
-                <View style={styles.cajaProducto}>
-                    <View style={styles.info}>
-                        <View>
-                            <Image style={{width:100,height:100, borderRadius:20,borderWidth: 1,}} source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/r/e/remera_disney_doc_m98561portada.jpg' }}/>
-                        </View>
-                            <View style={styles.descripcion}>
-                                <Text style={styles.opcion}>REMERA DE BLANCA NIEVES</Text>
-                                <Text style={styles.precio}>$1500</Text>
-                                <Text style={styles.cantidad}>Cantidad: 15</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-        </View>
-        
-        
-        
-        
-        
-        
-        
-        <View style={styles.cajaFinal}>
-            <View style={styles.total}>
-                <View>
-                    <Text style={styles.totalPrecio}>TOTAL: $10.000</Text>
-                </View>
-            </View>
-
-            <View>
-                <Button title="Finalizar compra"></Button>
-            </View>
-        </View>
-
-        
         </ScrollView>
+        
+        
+        <View style={styles.cajaTotal}>
+            {(props.checkout.length=== 0) ? <View></View> :  
+                    <View style={styles.cajaFinal}>
+                        <View style={styles.total}>
+                                <Text style={styles.totalPrecio}>TOTAL: ${totalPrice} </Text>
+                        </View>
+
+                        <View>
+                            <Button onPress={()=> props.navigation.navigate('Checkout',{preciototal: totalPrice})} title="Finalizar compra"></Button>
+                        </View>
+                    </View>}
+        </View>
+        
        </View>
        
        
@@ -132,68 +54,42 @@ const ShopCart = () => {
 }
 
 const styles = {
-    cajaFinal:{
-        justifyContent:'flex-end',
-        marginTop:25
-    },
-
+  
     totalPrecio:{
         color:'white',
         fontSize:20,
     },
 
+    total:{
+        alignItems:'center',
+        backgroundColor:'black',
+        color:'white',
+        paddingTop:15,
+        paddingBottom:15 
+    },
 
-total:{
-    alignItems:'center',
-    backgroundColor:'black',
-    color:'white'
-},
-
-
-cantidad:{
-    marginTop:20
-},
-precio:{
-    fontSize:15,
-    fontWeight:'bold',
-    marginTop:20
-},
-
-opcion:{
-    fontSize:15,
-    fontWeight:'bold',
+    cajaPrincipal:{
+        backgroundColor:'white',
+        justifyContent:'space-between',
+        flex:1,
         
     },
 
-descripcion:{
-    marginLeft:10,
-    
-},
-
-info:{
-    margin:17,
-    flexDirection:'row'
-},
-
-contenedorProducto:{
-alignItems:'center',
-},
-
-cajaProducto:{
-backgroundColor:'white',
-borderColor:'white',
-height:150,
-width:'95%',
-borderRadius:20,
-borderWidth: 1,
-
-marginTop:50
-},    
-
-cajaPrincipal:{
-    backgroundColor:'#E5E5E5'
-},
-
 }
 
-export default ShopCart
+const mapStateToProps = state => {
+    return {
+      checkout: state.purchaseR.checkout,
+      reload: state.purchaseR.reload
+    }
+  }
+  const mapDispatchToProps = {
+    checkoutAction: purchaseAction.checkout,
+    deleteClothes: purchaseAction.deleteClothes,
+    incOne: purchaseAction.incOne,
+    substOne: purchaseAction.substOne,
+    forceReload: purchaseAction.forceReload
+  }
+  
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ShopCart)

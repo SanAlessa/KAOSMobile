@@ -1,9 +1,15 @@
 import {combineReducers} from 'redux'
 import userReducer from './userReducer'
+import clothesReducer from './clothesReducer'
+import purchaseReducer from './purchaseReducer'
+
+
 
 
 const rootReducer = combineReducers({
-    userR:userReducer
+    userR:userReducer,
+    clothesR:clothesReducer,
+    purchaseR: purchaseReducer
 
 })
 

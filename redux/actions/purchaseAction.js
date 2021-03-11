@@ -4,13 +4,14 @@ const purchaseAction = {
             var cart = getState().purchaseR.checkout
             cart.push(clothes)
             dispatch({type: 'CHECKOUT', payload: cart})
+            console.log(cart)
         }
     },
 
     incOne:(product) => {
         return (dispatch, getState) => {
             var cart = getState().purchaseR.checkout
-            cart.map(toModify => (toModify.color && toModify.size) === (product.color && product.size) && toModify.quantity++)
+            cart.map(toModify => (toModify.id  === product.id) && toModify.quantity++)
             dispatch({type: 'CHECKOUT', payload: cart})
         }
     },
@@ -18,7 +19,7 @@ const purchaseAction = {
     substOne:(product) => {
         return (dispatch, getState) => {
             var cart = getState().purchaseR.checkout
-            cart.map(toModify => (toModify.color && toModify.size) === (product.color && product.size) && toModify.quantity--)
+            cart.map(toModify => (toModify.id  === product.id) && toModify.quantity--)
             dispatch({type: 'CHECKOUT', payload: cart})
         }
     },
@@ -26,8 +27,23 @@ const purchaseAction = {
     deleteClothes:(product) => {
         console.log(product)
         return (dispatch, getState)=>{
-            var cart = getState().purchaseR.checkout.filter(toModify => (toModify.color && toModify.size) !== (product.color && product.size))
+            var cart = getState().purchaseR.checkout.filter(toModify => (toModify.id  !== product.id))
+            console.log(cart)
             dispatch({type: 'CHECKOUT', payload: cart})
+        }
+    },
+
+    getCart: (cart) => {
+        return (dispatch, getState) => {
+            var forcedCart = JSON.parse(cart)
+            dispatch({type: 'CHECKOUT', payload: forcedCart})
+        }
+    },
+
+    forceReload:(reload) => {
+        console.log(reload)
+        return (dispatch) => {
+            dispatch({type: 'RELOAD', payload: reload})
         }
     }
 }

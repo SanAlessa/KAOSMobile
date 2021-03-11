@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import {
+  Text,
   Alert,
   StyleSheet,
   KeyboardAvoidingView,
@@ -24,7 +25,7 @@ const CreditCard  = () => {
   const { handleSubmit, formState } = formMethods
 
   function onSubmit(model) {
-    Alert.alert('Success: ' + JSON.stringify(model, null, 2))
+    Alert.alert('Gracias por su compra! Vuelva pronto.')
   }
 
   return (
@@ -47,7 +48,7 @@ const CreditCard  = () => {
         {formState.isValid && (
           <Button
             style={styles.button}
-            title={'CONFIRM PAYMENT'}
+            title={'CONFIRMAR PAGO!'}
             onPress={handleSubmit(onSubmit)}
           />
         )}
@@ -59,13 +60,15 @@ const CreditCard  = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    fontFamily:'Open Sans'
   },
   avoider: {
     flex: 1,
     padding: 35,
   },
   button: {
-   
+   backgroundColor:'#2296f3',
+   borderRadius:0
     
   },
 })

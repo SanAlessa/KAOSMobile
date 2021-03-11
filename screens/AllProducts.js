@@ -1,53 +1,43 @@
-import React from 'react'
-import {View, Image, ImageBackground,Text, TextInput, Button, Alert, ScrollView} from 'react-native';
+import React, {useRef, useState, useEffect} from 'react';
+import {View, Image, ImageBackground,Text, TextInput, Button, Alert, ScrollView, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux'
+import clothesActions from '../redux/actions/clothesActions';
 
 
-const AllProducts = () => {
+const AllProducts = (props) => {
+
+  useEffect(() => {
+    props.getClothes() 
+    
+}, [])
+
+
     return (
         <View style={styles.contenedor}>
             <ScrollView>
                 <View style={styles.cajaProducto}>
                 
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/c/h/chucknegro_1.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Hoodie</Text>
-                    <Text style={styles.price}>$84.00</Text>
-                </View>
+               
                 
+                  {props.clothes.map((product,index)  =>{
+                    return(
+                      <TouchableOpacity  key={index} onPress={()=> props.navigation.navigate('SingleProduct',{product: product})}>
+                      <View  style={styles.contenedorFirstCollection}>
+                      
+                        
+                      <Image   source={{uri:`${product.stock[0].images[0]}`}} style={styles.firstCollection}/>
+                        
+                        
+                      <Text   style={styles.productName}>{product.name.length <= 5 ? product.name : product.name.slice(0,12)+"..."}</Text>
+                      <Text   style={styles.price}>$ {product.price}</Text>
+                    
+                  </View>
+                  </TouchableOpacity>
+                    )
+                  })}
+               
                 
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/p/o/portadacangurocosmosbatik56425.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Buzo horrible</Text>
-                    <Text style={styles.price}>$53.00</Text>
-                </View>
-
-                
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/p/o/portadacangurocosmosbatik56425.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Buzo horrible</Text>
-                    <Text style={styles.price}>$53.00</Text>
-                </View>
-
-                
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/p/o/portadacangurocosmosbatik56425.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Buzo horrible</Text>
-                    <Text style={styles.price}>$53.00</Text>
-                </View>
-
-                
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/p/o/portadacangurocosmosbatik56425.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Buzo horrible</Text>
-                    <Text style={styles.price}>$53.00</Text>
-                </View>
-
-                
-                <View style={styles.contenedorFirstCollection}>
-                    <Image source={{uri:'https://www.47street.com.ar/media/catalog/product/cache/3fb5d7e1907479a32213f0a7d23de7e9/p/o/portadacangurocosmosbatik56425.jpg'}} style={styles.firstCollection}/>
-                    <Text style={styles.productName}>Buzo horrible</Text>
-                    <Text style={styles.price}>$53.00</Text>
-                </View>
+              
                 
                 </View>
             </ScrollView>
@@ -66,6 +56,7 @@ const styles ={
     productName:{
       marginLeft:5,
       fontWeight:'bold',
+      textTransform:'uppercase',
       fontSize:18,
     },
   
@@ -93,4 +84,16 @@ const styles ={
     },
    
   }
-export default AllProducts
+  const mapStateToProps = state => {
+    return {
+      clothes: state.clothesR.clothes,
+      loggedUser: state.userR.loggedUser
+    }
+  } // INFORMACION
+  
+  const mapDispatchToProps = { 
+    getClothes: clothesActions.getClothes
+    
+  } // FUNCIONES
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);
