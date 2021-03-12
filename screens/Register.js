@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 
 
 
-const fondoRegister = {uri:'https://i.imgur.com/rA2Wj5v.png'}
+const fondoRegister = {uri:'https://i.imgur.com/ix9SwB6.png'}
 
 
 const Register = (props) => {

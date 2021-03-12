@@ -19,16 +19,12 @@ const Home =(props) => {
     
 }, [])
 
-const disconnectUser = async()=> {
-  await props.disconnectUser()
-  props.navigation.navigate('Home')
-}
+
 
 if(props.loggedUser){
   var text = 
   <>
   <Text style={styles.show}  onPress={()=> props.navigation.navigate('AllProducts')}>Show all</Text>
-  <Text style={styles.xd}  onPress={()=> disconnectUser()}>LOGOUT</Text>
 </>
 
 } else {

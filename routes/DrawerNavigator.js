@@ -8,10 +8,11 @@ import Home from "../screens/Home";
 import CreditCard from "../screens/CreditCard";
 import SingleProduct from "../screens/SingleProduct";
 import ShopCart from "../screens/ShopCart";
+import Checkout from "../screens/Checkout";
+import PortadaHome from "../screens/PortadaHome";
 import AllProducts from "../screens/AllProducts";
 import TabNavigator from "./TabNavigator"
-import PortadaHome from "../screens/PortadaHome";
-import Checkout from "../screens/Checkout";
+import DrawerContent from "./DrawerContent"
 
 
 const Drawer = createDrawerNavigator();
@@ -21,22 +22,21 @@ const DrawerNavigator = (props) => {
 if(props.loggedUser){
   var routes = 
   <>
-    <Drawer.Screen name="Home" component={TabNavigator} />
+    
     <Drawer.Screen name="CreditCard" component={CreditCard} />
-    <Drawer.Screen name="Checkout" component={Checkout} />
     <Drawer.Screen name="SingleProduct" component={SingleProduct} />
     <Drawer.Screen name="ShopCart" component={ShopCart} />
     <Drawer.Screen name="AllProducts" component={AllProducts} />
-    
-    
-    
-    
+    <Drawer.Screen name="Checkout" component={Checkout} />
+
   </>
 } else {
     var routes = 
     <>
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Register" component={Register} />
+        <Drawer.Screen name="PortadaHome" component={PortadaHome} />
+
     </>
 }
 
@@ -45,10 +45,8 @@ if(props.loggedUser){
 
 
   return (
-      <Drawer.Navigator>
-         <Drawer.Screen name="PortadaHome" component={PortadaHome}/>
-        
-       
+      <Drawer.Navigator drawerContent={props =><DrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={TabNavigator} />
         
         {routes}
       </Drawer.Navigator>
