@@ -26,6 +26,7 @@ const CreditCard  = () => {
 
   function onSubmit(model) {
     Alert.alert('Gracias por su compra! Vuelva pronto.')
+    
   }
 
   return (

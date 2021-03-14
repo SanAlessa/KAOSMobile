@@ -15,7 +15,7 @@ const StackNavigator = (props) => {
 
 
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName="PortadaHome" screenOptions={{headerShown: false}}>
      
      <Stack.Screen name="PortadaHome" component={PortadaHome}/>
      <Stack.Screen name="Home" component={Login}/>

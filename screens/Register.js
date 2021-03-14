@@ -12,6 +12,7 @@ const fondoRegister = {uri:'https://i.imgur.com/ix9SwB6.png'}
 
 const Register = (props) => {
 
+    
 
     const [newUser, setNewUser] = useState({})
 
@@ -31,9 +32,8 @@ const Register = (props) => {
             Alert.alert('All fields are required!')
 
         } else {
-            Alert.alert("Hola")
+            Alert.alert("HOLA! BIENVENIDO A KAOS.")
             const respuesta = await props.registerUser(newUser)
-            
         }
         
 

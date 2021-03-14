@@ -1,9 +1,10 @@
 import React from 'react'
-import {View, Image, ImageBackground,Text, TextInput, Button, Alert, ScrollView} from 'react-native';
+import {View, Image, ImageBackground,Text, TextInput, Button, Alert, ScrollView, LogBox} from 'react-native';
 import CreditCard from './CreditCard';
 
 const Checkout = (props) => {
-    console.log(props)
+    
+    
     return (
         <View style={{flex:1}} >
         

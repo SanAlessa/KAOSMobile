@@ -12,20 +12,23 @@ function DrawerContent(props) {
     <View style={{ flex: 1 }}>
       <View style={{backgroundColor:'black', marginTop:40}}>
         <View style={{  flexDirection: 'column' }}>
-            <Title style={styles.title}>{!props.loggedUser ? 'Hello!' : 'Welcome ' + props.loggedUser.name + '!'}</Title>
+            <Title style={styles.title}>{!props.loggedUser ? 'Hello!' : 'Welcome ' + props.loggedUser.response.firstname + '!'}</Title>
           </View>
       </View>
+        
         
     
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <Drawer.Section style={styles.drawerSection}>
             
-            <DrawerItem style={{backgroundColor:'#2296f3'}}
+          <DrawerItem style={{backgroundColor:'#2296f3'}}
               label="HOME"
               labelStyle={{color:'white'}}
               onPress={() => { props.navigation.navigate('Home') }}
             />
+
+           
            
             {!props.loggedUser &&
               <>
@@ -34,6 +37,7 @@ function DrawerContent(props) {
               labelStyle={{color:'white'}}
               onPress={() => { props.navigation.navigate('PortadaHome') }}
             />
+              
                 <DrawerItem style={{backgroundColor:'#2296f3'}}
                  labelStyle={{color:'white'}}
                   label="SIGN UP"

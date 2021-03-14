@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Carousel, {ParallaxImage} from 'react-native-snap-carousel';
 import {connect} from 'react-redux'
-import {Button,View,Text,Image,ImageBackground,Dimensions,StyleSheet,TouchableOpacity,Platform, ScrollView} from 'react-native';
+import {Button,View,Text,Image,ImageBackground,Dimensions,StyleSheet,TouchableOpacity,Platform, ScrollView, TouchableHighlight} from 'react-native';
 import App from './Carrousel';
 import clothesActions from '../redux/actions/clothesActions';
 import userAction from '../redux/actions/userAction';
@@ -18,7 +18,6 @@ const Home =(props) => {
     props.getClothes() 
     
 }, [])
-
 
 
 if(props.loggedUser){
@@ -42,7 +41,10 @@ return(
        <View style={{alignItems:'center', marginTop:25, flexDirection:'row', justifyContent:'space-between'}} >
         <Image source={sidebar} style={{width:'10%',height:30,  }}/>
         <Image source={logo} style={{width:'40%',height:60}}/>
-        <Image source={carrito} style={{width:'10%',height:40}} />
+        <TouchableOpacity onPress={()=> props.navigation.navigate('ShopCart')} style={{width:'10%', height:50}}>
+          <Image source={carrito} style={{width:'100%',height:50}} />
+        </TouchableOpacity>
+        
        </View>  
        
         <App/>
@@ -73,7 +75,7 @@ return(
             
           </View>
 
-          {(props.clothes.length=== 0) ? <View><Text>Cargando...</Text></View> :
+          {(props.clothes.length=== 0) ? <View></View> :
           <View style={styles.contenidoGeneral}>
             <View style={styles.cajaDesigner}>
               <Text style={styles.designer}>Winter Collection</Text>
@@ -108,7 +110,9 @@ return(
 
 const styles ={
 
-
+contenedorFirstCollection:{
+  marginBottom:15,
+},
   price:{
     marginLeft:5,
   },
@@ -124,7 +128,8 @@ const styles ={
     width:180,
     borderRadius:20,
     borderWidth: 1,
-    marginTop: 25
+    marginTop: 25,
+    
   },
 
   cajaProducto:{

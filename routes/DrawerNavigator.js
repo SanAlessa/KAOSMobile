@@ -45,7 +45,7 @@ if(props.loggedUser){
 
 
   return (
-      <Drawer.Navigator drawerContent={props =><DrawerContent {...props} />}>
+      <Drawer.Navigator initialRouteName="PortadaHome" drawerContent={props =><DrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={TabNavigator} />
         
         {routes}
